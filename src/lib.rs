@@ -1,5 +1,3 @@
-#![feature(inclusive_range_syntax)]
-
 extern crate byteorder;
 #[macro_use]
 extern crate enum_primitive;

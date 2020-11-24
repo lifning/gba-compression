@@ -21,7 +21,7 @@ pub fn decompress_huffman(input: &[u8]) -> Result<Vec<u8>> {
         return Err(Error::new(ErrorKind::InvalidData, "compression header mismatch"));
     }
 
-    let bit_length = header & 0xF;
+    // let bit_length = header & 0xF;
     let decompressed_size: usize = cursor.read_u24::<LittleEndian>()? as usize;
 
     let huffman_tree = {
@@ -83,6 +83,6 @@ pub fn decompress_huffman(input: &[u8]) -> Result<Vec<u8>> {
     Ok(output)
 }
 
-pub fn compress_huffman(input: &[u8]) -> Result<Vec<u8>> {
+pub fn compress_huffman(_input: &[u8]) -> Result<Vec<u8>> {
     Err(Error::new(ErrorKind::Other, "unimplemented"))
 }
