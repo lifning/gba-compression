@@ -121,8 +121,8 @@ pub fn compress_lz77(input: &[u8], vram_safe: bool) -> Result<Vec<u8>> {
                     output.write_u8(data)?;
                 },
                 Block::Reference { offset, length } => {
-                    assert!((length >= 3) & (length <= 18), "length out of bounds");
-                    assert!((offset >= 1) & (offset <= 4096), "offset out of bounds");
+                    assert!((3..=18).contains(&length), "length out of bounds");
+                    assert!((1..=4096).contains(&offset), "offset out of bounds");
 
                     let data = (((offset - 1) & 0xFF) << 8) | ((length - 3) << 4) as u16 | ((offset - 1) >> 8);
                     output.write_u16::<LittleEndian>(data)?;

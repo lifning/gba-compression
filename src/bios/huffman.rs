@@ -59,10 +59,10 @@ pub fn decompress_huffman(input: &[u8]) -> Result<Vec<u8>> {
     let mut current_node = &huffman_tree;
 
     while output.len() < decompressed_size {
-        if let &HuffmanNode::Branch { ref node0, ref node1 } = current_node {
+        if let HuffmanNode::Branch { ref node0, ref node1 } = *current_node {
             current_node = if bits & 0x80000000 == 0 { node0 } else { node1 };
 
-            if let &HuffmanNode::Leaf { value } = current_node {
+            if let HuffmanNode::Leaf { value } = *current_node {
                 output.push(value);
                 current_node = &huffman_tree;
             }
